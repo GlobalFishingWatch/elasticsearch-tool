@@ -24,6 +24,7 @@ https://github.com/GlobalFishingWatch/elasticsearch-tool
 There are available the following commands:
 * Add-Alias
 * Create-Index
+* Delete-Index
 
 ---
 
@@ -81,5 +82,27 @@ elasticsearch-tool create-index
 When you execute this command, under the hood happens the followings steps:
 * Create the index (if not exists)
 * Put the mapping defined in the JSON file.
+
+---
+
+### Command: [delete-index]
+
+Delete an index 
+
+#### Flags
+##### Required flags
+- `--index-name=` The destination index name.
+- `--elastic-search-url=` The Elasticsearch's URL. 
+
+##### Optional flags
+No optional flags.
+
+#### Example
+Here an example of this command:
+```
+elasticsearch-tool delete-index 
+  --index-name=test-track-data
+  --elastic-search-url="https://gfw:****@elasticsearch.globalfishingwatch.org" 
+```
 
 ---
