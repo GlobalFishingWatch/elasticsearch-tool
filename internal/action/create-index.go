@@ -42,6 +42,6 @@ func putMapping(elasticClient *elasticsearch.Client, indexName string, mapping i
 }
 
 func parseMappingToReader(mapping string) io.Reader {
-	log.Println("→ ES →→ Casting mapping to reader: %s", mapping)
+	log.Printf("→ ES →→ Casting mapping to reader: %s", mapping)
 	return strings.NewReader(mapping)
 }
