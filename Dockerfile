@@ -12,5 +12,6 @@ RUN go build -o elasticsearch-tool main.go
 CMD ["reflex", "-c", "./reflex.conf"]
 
 FROM alpine AS build
-COPY --from=development /go/src/app/elasticsearch-tool /opt/elasticsearch-tool
+WORKDIR /opt/
+COPY --from=development /go/src/app/elasticsearch-tool elasticsearch-tool
 ENTRYPOINT ["/opt/elasticsearch-tool"]
