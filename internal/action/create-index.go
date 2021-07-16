@@ -1,14 +1,15 @@
 package action
 
 import (
+	"io"
+	"log"
+	"strings"
+
 	"github.com/GlobalFishingWatch/elasticsearch-tool/internal/common"
 	"github.com/GlobalFishingWatch/elasticsearch-tool/types"
 	"github.com/GlobalFishingWatch/elasticsearch-tool/utils"
 	"github.com/elastic/go-elasticsearch/v7"
 	"github.com/elastic/go-elasticsearch/v7/esapi"
-	"io"
-	"log"
-	"strings"
 )
 
 func CreateIndexWithCustomMapping(params types.CreateIndexParams) {
