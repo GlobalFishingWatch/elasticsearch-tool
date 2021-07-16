@@ -16,9 +16,9 @@ func init() {
 	createIndexCmd.Flags().StringP( "elastic-search-url", "", "", "URL exposed by Elasticsearch cluster (required)")
 	createIndexCmd.MarkFlagRequired("elastic-search-url")
 
-	viper.BindPFlag("mapping", createIndexCmd.Flags().Lookup("mapping"))
-	viper.BindPFlag("index-name", createIndexCmd.Flags().Lookup("index-name"))
-	viper.BindPFlag("elastic-search-url", createIndexCmd.Flags().Lookup("elastic-search-url"))
+	viper.BindPFlag("create-index-mapping", createIndexCmd.Flags().Lookup("mapping"))
+	viper.BindPFlag("create-index-index-name", createIndexCmd.Flags().Lookup("index-name"))
+	viper.BindPFlag("create-index-elastic-search-url", createIndexCmd.Flags().Lookup("elastic-search-url"))
 
 	rootCmd.AddCommand(createIndexCmd)
 }
@@ -33,12 +33,13 @@ Example:
 	elasticsearch-tool create-index --mapping={} --index-name=test-vessels --elastic-search-url="https://user:password@elastic.gfw.org"`,
 	Run: func(cmd *cobra.Command, args []string) {
 		params := types.CreateIndexParams{
-			IndexName:        viper.GetString("index-name"),
-			Mapping:          viper.GetString("mapping"),
-			ElasticSearchUrl: viper.GetString("elastic-search-url"),
+			IndexName:        viper.GetString("create-index-index-name"),
+			Mapping:          viper.GetString("create-index-mapping"),
+			ElasticSearchUrl: viper.GetString("create-index-elastic-search-url"),
 		}
 		log.Println("→ Executing Create Index command")
 		action.CreateIndexWithCustomMapping(params)
+		log.Println("→ Create Index command finished")
 	},
 }
 

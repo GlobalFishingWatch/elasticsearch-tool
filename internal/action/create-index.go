@@ -1,14 +1,15 @@
 package action
 
 import (
+	"io"
+	"log"
+	"strings"
+
 	"github.com/GlobalFishingWatch/elasticsearch-tool/internal/common"
 	"github.com/GlobalFishingWatch/elasticsearch-tool/types"
 	"github.com/GlobalFishingWatch/elasticsearch-tool/utils"
 	"github.com/elastic/go-elasticsearch/v7"
 	"github.com/elastic/go-elasticsearch/v7/esapi"
-	"io"
-	"log"
-	"strings"
 )
 
 func CreateIndexWithCustomMapping(params types.CreateIndexParams) {
@@ -42,6 +43,6 @@ func putMapping(elasticClient *elasticsearch.Client, indexName string, mapping i
 }
 
 func parseMappingToReader(mapping string) io.Reader {
-	log.Println("→ ES →→ Casting mapping to reader: %s", mapping)
+	log.Printf("→ ES →→ Casting mapping to reader: %s", mapping)
 	return strings.NewReader(mapping)
 }
