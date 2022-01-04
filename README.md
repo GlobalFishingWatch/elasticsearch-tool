@@ -106,3 +106,27 @@ elasticsearch-tool delete-index
 ```
 
 ---
+---
+
+### Command: [delete-indices-by-prefix]
+
+Delete indices by prefix
+
+#### Flags
+##### Required flags
+- `--index-prefix`=` The prefix of the indices to delete.
+- `--elastic-search-url=` The Elasticsearch's URL. 
+
+##### Optional flags
+- `--no-delete-index=` Index name that you do not want to delete.
+
+#### Example
+Here an example of this command:
+```
+elasticsearch-tool delete-indices-by-prefix
+  --index-prefix=test-track
+  --no-delete-index=test-track-data
+  --elastic-search-url="https://gfw:****@elasticsearch.globalfishingwatch.org" 
+```
+
+---

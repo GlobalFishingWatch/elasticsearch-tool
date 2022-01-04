@@ -10,7 +10,7 @@ import (
 )
 
 func init() {
-	deleteIndicesByPrefixCmd.Flags().StringP("index-prefix", "", "", "The prefix of the destination indices (required)")
+	deleteIndicesByPrefixCmd.Flags().StringP("index-prefix", "", "", "The prefix of the indices to delete (required)")
 	deleteIndicesByPrefixCmd.MarkFlagRequired("index-prefix")
 	deleteIndicesByPrefixCmd.Flags().StringP("no-delete-index", "", "", "Index name that you do not want to delete (optional)")
 	deleteIndicesByPrefixCmd.Flags().StringP("elastic-search-url", "", "", "URL exposed by Elasticsearch cluster (required)")
