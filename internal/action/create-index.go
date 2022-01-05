@@ -39,6 +39,9 @@ func putMapping(elasticClient *elasticsearch.Client, indexName string, mapping i
 	if err != nil {
 		log.Fatalf("→ ES →→ Cannot put mapping: %s", err)
 	}
+	if res.IsError() {
+		log.Fatalf("→ ES →→ Cannot delete index: %s", res)
+	}
 	return res
 }
 

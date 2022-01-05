@@ -18,6 +18,10 @@ func DeleteIndex(params types.DeleteIndexParams) {
 	action.DeleteIndex(params)
 }
 
+func DeleteIndexIfExists(params types.DeleteIndexParams) {
+	action.DeleteIndexIfExists(params)
+}
+
 func DeleteIndicesByPrefix(params types.DeleteIndicesByPrefixParams) {
 	action.DeleteIndicesByPrefix(params)
 }
