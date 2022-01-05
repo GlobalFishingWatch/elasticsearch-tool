@@ -7,21 +7,21 @@ import (
 	"log"
 )
 
-func DeleteIndex(params types.DeleteIndexParams) {
+
+func DeleteIndexIfExists(params types.DeleteIndexParams) {
 	utils.ValidateUrl(params.ElasticSearchUrl)
 	elasticSearchClient = common.CreateElasticSearchClient(params.ElasticSearchUrl)
-	deleteIndex(params.IndexName)
+	deleteIndexIfExists(params.IndexName)
 }
 
 
-func deleteIndex(indexName string) {
+func deleteIndexIfExists(indexName string) {
 	log.Printf("→ ES →→ Deleting index %s", indexName)
 	res, err := elasticSearchClient.Indices.Delete([]string{indexName})
 	if err != nil {
 		log.Fatalf("→ ES →→ Cannot delete index: %s", err)
 	}
 	if res.IsError() {
-		log.Fatalf("→ ES →→ Cannot delete index: %s", res)
+		log.Printf("→ ES →→ Cannot delete index: %s", res)
 	}
-	log.Printf("→ Set Mapping response: %v", res)
 }
