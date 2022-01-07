@@ -6,6 +6,7 @@ import (
 )
 
 func ValidateUrl(url string) {
+	log.Printf("Validate Elastic URL: %s", url)
 	re := regexp.MustCompile(`^http://(.*)|^https://(.*)`)
 	match := re.Match([]byte(url))
 	if !match {
