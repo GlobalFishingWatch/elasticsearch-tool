@@ -15,15 +15,17 @@ func CreateIndexWithCustomMapping(params types.CreateIndexParams) {
 	utils.ValidateUrl(params.ElasticSearchUrl)
 	elasticClient := common.CreateElasticSearchClient(params.ElasticSearchUrl)
 	createIndex(elasticClient, params.IndexName)
-	mapping := parseToReader(params.Mapping)
-	res := putMapping(elasticClient, params.IndexName, mapping)
-	log.Printf("→ Set Mapping response: %v", res)
 
 	if params.Settings != "" {
 		settings := parseToReader(params.Settings)
-		res = putSettings(elasticClient, params.IndexName, settings)
-		log.Printf("→ Set Settings response: %v", res)
+		settingsRes := putSettings(elasticClient, params.IndexName, settings)
+		log.Printf("→ Set Settings response: %v", settingsRes)
 	}
+
+	mapping := parseToReader(params.Mapping)
+	mappingRes := putMapping(elasticClient, params.IndexName, mapping)
+	log.Printf("→ Set Mapping response: %v", mappingRes)
+
 }
 
 func createIndex(elasticSearchClient *elasticsearch.Client, indexName string) {
