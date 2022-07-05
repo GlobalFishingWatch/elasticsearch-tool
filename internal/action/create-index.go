@@ -51,15 +51,24 @@ func putMapping(elasticClient *elasticsearch.Client, indexName string, mapping i
 }
 
 func putSettings(elasticClient *elasticsearch.Client, indexName string, settings io.Reader) *esapi.Response {
-	res, err := elasticClient.Indices.PutSettings(settings, func(index *esapi.IndicesPutSettingsRequest) {
+
+	res, err := elasticClient.Indices.Close([]string{indexName})
+	if res.IsError() || err != nil {
+		log.Fatalf("→ ES →→ Cannot close index: %s", err)
+	}
+
+	res, err = elasticClient.Indices.PutSettings(settings, func(index *esapi.IndicesPutSettingsRequest) {
 		index.Index = []string{indexName}
 	})
-	if err != nil {
+	if res.IsError() || err != nil {
 		log.Fatalf("→ ES →→ Cannot put mapping: %s", err)
 	}
-	if res.IsError() {
-		log.Fatalf("→ ES →→ Cannot delete index: %s", res)
+
+	res, err = elasticClient.Indices.Open([]string{indexName})
+	if res.IsError() || err != nil {
+		log.Fatalf("→ ES →→ Cannot open index: %s", err)
 	}
+
 	return res
 }
 
